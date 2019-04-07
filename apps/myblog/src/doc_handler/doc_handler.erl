@@ -40,7 +40,7 @@ stream_file(Req0, Path) ->
       {more, BodyChunk, Req} ->
 	  save_file(BodyChunk, Path), stream_file(Req, Path)
     end.
-
+%% 保存文件
 save_file(Binary, Path) ->
     {ok, G} = file:open(Path, [raw, binary, append]),
     file:write(G, Binary),
