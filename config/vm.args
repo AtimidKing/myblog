@@ -1,0 +1,6 @@
+-sname myblog
+
+-setcookie myblog_cookie
+
++K true
++A30
