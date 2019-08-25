@@ -1,0 +1,13 @@
+{script, {myblog, "0.1.0"},
+ [
+  {progress, loading},
+  {path, ["_build\default\lib\cowlib\ebin","_build\default\lib\cowboy\ebin","_build\default\lib\myblog\ebin","_build\default\lib\ranch\ebin"]},
+  {preLoaded, [sasl,stdlib, crypto, asn1]},
+  {preLoaded, [public_key]},
+  {preLoaded, [ranch]},
+  {preLoaded, [cowboy]},
+  {preLoaded, [logger]},
+  {preLoaded, [myblog]},
+  {kernel_load_completed},
+  {progress, started}]}.
+
