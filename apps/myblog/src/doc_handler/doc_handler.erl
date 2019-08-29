@@ -9,7 +9,8 @@
 
 init(Req0, State = ["/i"]) ->
     Req = cowboy_req:reply(200,
-			   #{<<"content-type">> =><<"text/html;charset=UTF-8">>},
+			   #{<<"content-type">> =>
+				 <<"text/html;charset=UTF-8">>},
 			   <<"zzz,你好！"/utf8>>, Req0),
     {ok, Req, State};
 init(Req0, State = []) ->
@@ -23,14 +24,17 @@ init(Req0, State = []) ->
 init(Req0, State = ["/list"]) ->
     {ok, FileList} = file:list_dir(?SAVE_PATH),
     io:format("fileList:~p~n", [FileList]),
-    FileListString =
-    unicode:characters_to_binary(lists:flatten(FileList)),
-    
+    % FileListString =unicode:characters_to_binary(lists:flatten(FileList)),
+    FileNameList = lists:map(fun (E) ->
+				     unicode:characters_to_binary(E)
+			     end,
+			     FileList),
     io:format("FileList=~p~n",
-	      [{?MODULE, ?LINE, FileListString}]),
+	      [{?MODULE, ?LINE, FileNameList}]),
     Req = cowboy_req:reply(200,
-			   #{<<"content-type">> => <<"text/plain;charset=UTF-8">>},
-			   jsx:encode(FileListString), Req0),
+			   #{<<"content-type">> =>
+				 <<"text/plain;charset=UTF-8">>},
+			   jsx:encode(FileNameList), Req0),
     {ok, Req, State}.
 
 multipart(Req0) ->
